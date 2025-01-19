@@ -1,112 +1,129 @@
-# Mobile Forensics Tool
+# **Mobile Forensics Application**  
+The **Mobile Forensics Tool** is a GUI-based application designed to extract data from Android devices using **ADB (Android Debug Bridge)**. This tool provides information such as:  
+- Installed apps  
+- Social media apps  
+- Battery status  
+- Call logs  
 
-![Python Version](https://img.shields.io/badge/python-3.8%2B-blue)
-![License](https://img.shields.io/badge/license-MIT-green)
-![Platform](https://img.shields.io/badge/platform-Windows%20%7C%20Linux%20%7C%20macOS-lightgrey)
-
-## 🚀 Overview
-
-The **Mobile Forensics Tool** is a GUI-based application designed to extract data from Android devices using ADB (Android Debug Bridge). This tool provides information such as installed apps, social media apps, battery status, and call logs, helping in mobile forensics investigations.
-
-The GUI has been designed with a futuristic and modern look using the `ttkbootstrap` library.
+It is particularly useful for **mobile forensics investigations**.
 
 ---
 
-## ✨ Features
-
-- **Connected Devices**: Lists all connected Android devices.
-- **Installed Apps**: Retrieves and displays all installed apps.
-- **Social Media Apps**: Filters and displays popular social media apps.
-- **Battery Status**: Shows detailed battery information.
-- **Call Logs**: Extracts and displays call logs.
+## **🚀 Features**
+- **View Connected Devices**: Lists all connected Android devices.  
+- **Installed Apps**: Displays all apps installed on the device.  
+- **Social Media Apps**: Identifies and filters popular social media applications.  
+- **Battery Status**: Shows the battery information of the device.  
+- **Call Logs**: Extracts and displays detailed call logs.  
 
 ---
 
-## 🛠️ Prerequisites
+## **📋 Prerequisites**
+To use this tool, ensure the following requirements are met:
 
-1. **Python 3.8+**: Install Python from [python.org](https://www.python.org/downloads/).
-2. **ADB (Android Debug Bridge)**: 
-   - Download the [Android SDK Platform Tools](https://developer.android.com/studio/releases/platform-tools).
-   - Add the `platform-tools` directory to your system's PATH.
+### **1. Install Required Tools and Libraries**
+#### **ADB (Android Debug Bridge)**
+1. Install ADB on your computer. Follow [this guide](https://developer.android.com/studio/releases/platform-tools) to download and set up ADB.  
+2. Ensure `adb` is added to your system's PATH for global use.
 
-   Verify installation:
+#### **Python Libraries**
+1. Install `ttkbootstrap` for the GUI framework:  
    ```bash
-   adb version
+   pip install ttkbootstrap
    ```
-3. **ttkbootstrap**:
-   - Install using pip:
-     ```bash
-     pip install ttkbootstrap
-     ```
-
-4. **Enable USB Debugging on Android Device**:
-   - Go to **Settings > About Phone** and tap **Build Number** 7 times to enable Developer Options.
-   - Navigate to **Settings > Developer Options** and enable **USB Debugging**.
 
 ---
 
-## 📦 Installation
+### **2. Enable USB Debugging on Your Mobile Device**
+1. On your Android device, go to **Settings > About Phone**.  
+2. Tap **Build Number** 7 times to enable **Developer Options**.  
+3. Navigate to **Settings > Developer Options** and enable **USB Debugging**.  
 
-1. Clone this repository:
+---
+
+### **3. Connect Your Device**
+1. Use a USB cable to connect the device to your computer.  
+2. Open a terminal or command prompt and run:  
+   ```bash
+   adb devices
+   ```
+3. If prompted on your device, allow **USB Debugging**. You should see your device listed as `"device"`.  
+
+---
+
+### **4. Run the Script**
+1. Save the provided script to a `.py` file (e.g., `mobile_forensics.py`).  
+2. Run the script:  
+   ```bash
+   python mobile_forensics.py
+   ```
+3. Interact with the GUI to extract data:  
+   - **All Installed Apps**: Displays all installed apps on the connected device.  
+   - **Social Media Apps**: Lists only popular social media applications.  
+   - **Battery Status**: Fetches the current battery information.  
+   - **Call Logs**: Displays call log details.  
+
+---
+
+### **5. Troubleshooting**
+- **If `adb devices` shows the device as `"unauthorized"`:**  
+  - Reconnect your device and accept the debugging prompt.  
+- **If no devices are listed:**  
+  - Verify the USB connection and ensure **USB Debugging** is enabled.  
+  - Run the following commands:  
+    ```bash
+    adb kill-server
+    adb start-server
+    ```
+
+---
+
+### **6. Extracted Data**
+- **Installed Apps**: Retrieved using the `adb shell pm list packages -3` command.  
+- **Social Media Apps**: Filters installed apps based on specific package names.  
+- **Battery Status**: Captures detailed battery statistics using `adb shell dumpsys battery`.  
+- **Call Logs**: Queries the call log content provider with `adb shell content query`.  
+
+---
+
+## **📦 Installation**
+1. Clone the repository:
    ```bash
    git clone https://github.com/your-username/mobile-forensics.git
    cd mobile-forensics
    ```
 
-2. Install required dependencies:
-   ```bash
-   pip install -r requirements.txt
-   ```
-
-3. Run the tool:
+2. Run the application:
    ```bash
    python mobile_forensics.py
    ```
 
 ---
 
-## 🖥️ Usage
-
-1. Connect your Android device to your computer via USB.
-2. Launch the tool by running the `mobile_forensics.py` script.
-3. Use the buttons on the GUI to:
-   - View connected devices.
-   - Display all installed apps.
-   - Display social media apps.
-   - Get battery status.
-   - View call logs.
+## **⚠️ Instructions**
+- Ensure that **ADB is installed and added to PATH** before running the tool.  
+- The application will not function unless **USB Debugging is enabled** on the connected device.  
+- Use this tool **only with proper authorization** and for educational or lawful purposes.  
 
 ---
 
-## 🎨 Screenshots
-
-### Main GUI
-<img src="screenshots/main_gui.png" alt="Main GUI" width="600"/>
-
-### Installed Apps
-<img src="screenshots/installed_apps.png" alt="Installed Apps" width="600"/>
-
----
-
-## 🛡️ License
-
+## **📄 License**
 This project is licensed under the **MIT License**. See the [LICENSE](LICENSE) file for details.
 
 ---
 
-## 🤝 Contributing
-
-Contributions are welcome! If you'd like to improve this project:
-1. Fork the repository.
-2. Create a new branch:
+## **🤝 Contributing**
+We welcome contributions! To contribute:  
+1. Fork the repository.  
+2. Create a feature branch:
    ```bash
    git checkout -b feature/your-feature-name
    ```
 3. Commit your changes:
    ```bash
-   git commit -m "Add some feature"
+   git commit -m "Add new feature"
    ```
-4. Push to the branch:
+4. Push the branch:
    ```bash
    git push origin feature/your-feature-name
    ```
@@ -114,23 +131,16 @@ Contributions are welcome! If you'd like to improve this project:
 
 ---
 
-## 🧑‍💻 Author
-
+## **👤 Author**  
 **Your Name**  
 - GitHub: [@your-username](https://github.com/your-username)  
-- LinkedIn: [Your LinkedIn Profile](https://linkedin.com/in/your-profile)
+- LinkedIn: [Your LinkedIn Profile](https://linkedin.com/in/your-profile)  
 
 ---
 
-## ⚠️ Disclaimer
-
-This tool is intended for educational purposes only. Ensure you have proper authorization before using it on any device.
+## **⚠️ Disclaimer**  
+This tool is for **educational purposes only**. Ensure you have explicit authorization before using it on any device.
 
 ---
 
-### Notes
-1. Replace `your-username` with your GitHub username.
-2. Add screenshots of the application in the `screenshots` directory and reference them in the README.
-3. Customize the "Author" section with your details.
-
-Let me know if you need help with uploading this to GitHub!
+Feel free to replace placeholders like `your-username` and `Your LinkedIn Profile` with your actual information! Let me know if you'd like further assistance!
