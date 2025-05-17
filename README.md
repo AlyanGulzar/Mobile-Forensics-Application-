@@ -1,146 +1,113 @@
-# **Mobile Forensics Application**  
-The **Mobile Forensics Tool** is a GUI-based application designed to extract data from Android devices using **ADB (Android Debug Bridge)**. This tool provides information such as:  
-- Installed apps  
-- Social media apps  
-- Battery status  
-- Call logs  
+# Mobile Forensics Tool
 
-It is particularly useful for **mobile forensics investigations**.
+The Mobile Forensics Tool is a GUI-based application built with Python and `ttkbootstrap`. It leverages **ADB (Android Debug Bridge)** to extract forensic artifacts from Android devices in real-time. The tool provides access to device information, logs, app data, network status, and more, making it ideal for mobile forensics analysis and lawful investigations.
 
 ---
 
-## **🚀 Features**
-- **View Connected Devices**: Lists all connected Android devices.  
-- **Installed Apps**: Displays all apps installed on the device.  
-- **Social Media Apps**: Identifies and filters popular social media applications.  
-- **Battery Status**: Shows the battery information of the device.  
-- **Call Logs**: Extracts and displays detailed call logs.  
+## Features
+
+- **Device Info**
+  - Connect device
+  - Get system properties
+  - Battery stats
+  - CPU and memory info
+
+- **App Management**
+  - List installed user applications
+
+- **Logs**
+  - View live system logs (`logcat`)
+  - Clear logs
+
+- **File Management**
+  - Push files to the device
+  - Pull files from the device
+
+- **Network**
+  - View network interface configuration (IP address, interfaces)
+
+- **Call & SMS Logs**
+  - Retrieve call logs
+  - Retrieve SMS logs
+  - Extract app data by package name
+
+- **Screen & Media**
+  - Capture screenshots
+  - Record screen video
+
+- **Access & Shell**
+  - Attempt to enable root access (`adb root`)
+  - Open interactive ADB shell
 
 ---
 
-## **📋 Prerequisites**
-To use this tool, ensure the following requirements are met:
+## Prerequisites
 
-### **1. Install Required Tools and Libraries**
-#### **ADB (Android Debug Bridge)**
-1. Install ADB on your computer. Follow [this guide](https://developer.android.com/studio/releases/platform-tools) to download and set up ADB.  
-2. Ensure `adb` is added to your system's PATH for global use.
+### 1. Install ADB (Android Debug Bridge)
 
-#### **Python Libraries**
-1. Install `ttkbootstrap` for the GUI framework:  
+- Download from: https://developer.android.com/studio/releases/platform-tools
+- Add the extracted platform-tools directory to your system’s `PATH`.
+
+### 2. Python Dependencies
+
+Install required libraries:
+
+```bash
+pip install ttkbootstrap
+```
+### 3. Enable USB Debugging on the Android Device
+
+- Go to Settings > About phone > Tap 'Build number' 7 times
+- Navigate to Developer Options and enable USB Debugging
+
+---
+
+## How to Use
+
+1. **Clone or download this repository:**
+
    ```bash
-   pip install ttkbootstrap
+   git clone https://github.com/your-username/mobile-forensics-tool.git
+   cd mobile-forensics-tool
    ```
 
----
+2. **Run the tool:**
 
-### **2. Enable USB Debugging on Your Mobile Device**
-1. On your Android device, go to **Settings > About Phone**.  
-2. Tap **Build Number** 7 times to enable **Developer Options**.  
-3. Navigate to **Settings > Developer Options** and enable **USB Debugging**.  
-
----
-
-### **3. Connect Your Device**
-1. Use a USB cable to connect the device to your computer.  
-2. Open a terminal or command prompt and run:  
    ```bash
-   adb devices
-   ```
-3. If prompted on your device, allow **USB Debugging**. You should see your device listed as `"device"`.  
-
----
-
-### **4. Run the Script**
-1. Save the provided script to a `.py` file (e.g., `mobile_forensics.py`).  
-2. Run the script:  
-   ```bash
-   python mobile_forensics.py
-   ```
-3. Interact with the GUI to extract data:  
-   - **All Installed Apps**: Displays all installed apps on the connected device.  
-   - **Social Media Apps**: Lists only popular social media applications.  
-   - **Battery Status**: Fetches the current battery information.  
-   - **Call Logs**: Displays call log details.  
-
----
-
-### **5. Troubleshooting**
-- **If `adb devices` shows the device as `"unauthorized"`:**  
-  - Reconnect your device and accept the debugging prompt.  
-- **If no devices are listed:**  
-  - Verify the USB connection and ensure **USB Debugging** is enabled.  
-  - Run the following commands:  
-    ```bash
-    adb kill-server
-    adb start-server
-    ```
-
----
-
-### **6. Extracted Data**
-- **Installed Apps**: Retrieved using the `adb shell pm list packages -3` command.  
-- **Social Media Apps**: Filters installed apps based on specific package names.  
-- **Battery Status**: Captures detailed battery statistics using `adb shell dumpsys battery`.  
-- **Call Logs**: Queries the call log content provider with `adb shell content query`.  
-
----
-
-## **📦 Installation**
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/your-username/mobile-forensics.git
-   cd mobile-forensics
+   python mobileforensics.py
    ```
 
-2. Run the application:
-   ```bash
-   python mobile_forensics.py
-   ```
+3. **Interact with the GUI:**
 
----
+   - Use the tabs to navigate between features (`Device Info`, `Logs`, `Network`, etc.)
+   - Click buttons to extract or view information
+   - Output will be displayed in the main output window
 
-## **⚠️ Instructions**
-- Ensure that **ADB is installed and added to PATH** before running the tool.  
-- The application will not function unless **USB Debugging is enabled** on the connected device.  
-- Use this tool **only with proper authorization** and for educational or lawful purposes.  
+## Use Cases
 
----
+- Forensic analysis of Android devices
+- Incident response investigations
+- Data recovery and evidence extraction
+- App behavior inspection
 
-## **📄 License**
-This project is licensed under the **MIT License**. See the [LICENSE](LICENSE) file for details.
+## Limitations
 
----
+- Root access is not guaranteed and depends on the target device.
+- Some files and app data may be inaccessible on non-rooted devices.
+- SMS and call log access may be restricted on newer Android versions due to permission model changes.
+- Some ADB features require device to be in unlocked bootloader state.
 
-## **🤝 Contributing**
-We welcome contributions! To contribute:  
-1. Fork the repository.  
-2. Create a feature branch:
-   ```bash
-   git checkout -b feature/your-feature-name
-   ```
-3. Commit your changes:
-   ```bash
-   git commit -m "Add new feature"
-   ```
-4. Push the branch:
-   ```bash
-   git push origin feature/your-feature-name
-   ```
-5. Open a pull request.
+## Troubleshooting
 
----
+- **Device shows "unauthorized" in `adb devices`:**  
+  Reconnect device and accept the USB debugging prompt on the phone.
 
-## **👤 Author**  
-**Your Name**  
-- GitHub: [@your-username](https://github.com/your-username)  
-- LinkedIn: [Your LinkedIn Profile](https://linkedin.com/in/your-profile)  
+- **Device not listed:**  
+  Check cable and USB mode (should be "File Transfer" or "Transferring files").
 
----
+- **Restart ADB:**
 
-## **⚠️ Disclaimer**  
-This tool is for **educational purposes only**. Ensure you have explicit authorization before using it on any device.
-
----
-
-Feel free to replace placeholders like `your-username` and `Your LinkedIn Profile` with your actual information! Let me know if you'd like further assistance!
+  ```bash
+  adb kill-server
+  adb start-server
+  ```
